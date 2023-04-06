@@ -71,9 +71,9 @@ int main(int argc, char *argv[]) {
   double err;
 
 
-  // warm up
-  RandAdapLUPP(A, sk, rd, T, flops, tol, block);
  
+//#define BLOCK 1
+  
 #ifdef BLOCK
   int nb[7] = {16, 32, 64, 128, 256, 512, 1024};
 
@@ -81,6 +81,9 @@ int main(int argc, char *argv[]) {
     block = nb[i];
     std::cout<<"block size: "<<block<<std::endl;
 #endif
+  
+  // warm up
+  RandAdapLUPP(A, sk, rd, T, flops, tol, block);
 
   t.start();
   RandAdapLUPP(A, sk, rd, T, flops, tol, block);

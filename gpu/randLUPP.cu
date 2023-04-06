@@ -89,7 +89,7 @@ void RandLUPP(const double *A, int m, int n, int k,
   flops = 2.*m*n*k + 2.*m*k*k/3. + 1.0*k*k*(m-k);
 
 
-#if 0
+#ifdef PROF
   std::cout<<std::endl
     <<"--------------------\n"
     <<"  RandLUPP\n"

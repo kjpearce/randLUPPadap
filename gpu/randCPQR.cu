@@ -78,7 +78,7 @@ void RandCPQR_column(const double *A, int m, int n, int k,
   flops = 2.*m*n*k + FLOPS_DGEQRF( k, n ) + 1.0*k*k*(n-k);
 
 
-#if 0
+#ifdef PROF
   std::cout<<std::endl
     <<"--------------------\n"
     <<"  RandCPQR\n"

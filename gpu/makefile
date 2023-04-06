@@ -9,11 +9,12 @@ OBJS += $(patsubst %.cu,%.o,$(wildcard *.cu))
 
 CFLAGS ?= -O3 -fPIC --std=c++14 -Wall -Wno-unused -DEIGEN_USE_MKL_ALL -DMKL_ILP64 -m64 
 #CFLAGS ?= -g -fPIC --std=c++14 -Wall -Wno-unused -DEIGEN_USE_MKL_ALL -DMKL_ILP64 -m64 
-VFLAGS ?= -O3 -arch=compute_70 -code=sm_70 -Xcompiler -fPIC 
+VFLAGS ?= -DPROF -O3 -arch=compute_70 -code=sm_70 -Xcompiler -fPIC 
 
 
 LFLAGS ?= -Wl,-rpath,$(shell pwd)
-LFLAGS += -L${MKLROOT}/lib/intel64 -Wl,--no-as-needed -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl
+#LFLAGS += -L${MKLROOT}/lib/intel64 -Wl,--no-as-needed -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl
+LFLAGS += -L${MKLROOT}/lib/intel64 -Wl,--no-as-needed -lmkl_intel_ilp64 -lmkl_gnu_thread -lmkl_core -lgomp -lpthread -lm -ldl
 LFLAGS += -lcublas -lcusolver -lcuda -lcudart 
 
 INCLUDES = -I$(EIGEN_ROOT) -I$(EIGEN_RAND_ROOT) -I${MKLROOT}/include
